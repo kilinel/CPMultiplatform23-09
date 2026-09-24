@@ -5,10 +5,14 @@ public class TargetContentController : MonoBehaviour
 {
     [SerializeField] ObserverBehaviour target;
     [SerializeField] GameObject contentRoot;
-
+    [SerializeField] GameObject pokedexPanel;
     void Awake()
     {
         contentRoot.SetActive(false);
+       
+        if (pokedexPanel != null)
+            pokedexPanel.SetActive(false);
+
         target.OnTargetStatusChanged += OnStatusChanged;
     }
 
@@ -24,5 +28,8 @@ public class TargetContentController : MonoBehaviour
             status.Status == Status.EXTENDED_TRACKED;
 
         contentRoot.SetActive(visible);
+
+        if (!visible && pokedexPanel != null)
+            pokedexPanel.SetActive(false);
     }
 }
